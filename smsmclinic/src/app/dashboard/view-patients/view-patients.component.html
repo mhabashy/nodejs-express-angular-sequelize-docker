@@ -1,0 +1,120 @@
+<div class="p-10">
+  <p-card styleClass="m-b-10">
+    <button pButton label="Add Patient" icon="pi pi-plus" class="m-r-10" (click)="addPatient()"></button>
+    <button pButton label="Download Patients" icon="pi pi-file" class="m-r-10" (click)="downloadExcel()"></button>
+    <button pButton label="Download (Simple) Patients" icon="pi pi-file" class="m-r-10" (click)="downloadExcelSimple()"></button>
+  </p-card>
+  <p-card *ngFor="let p of patients" [header]="p.name" styleClass="m-b-10">
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Question Only
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.generalQuestion}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        First Name
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.firstName}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Last Name
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.lastName}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Full Name
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.name}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Date of Birth
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.dateOfBirth | standardDate}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Age
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.age}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Phone
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.phone}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Email
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.email}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Refills
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.refills}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Online
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.online}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Contact Type
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.contactType}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Address
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.address}} {{p.city}}, FL {{p.zipcode}}
+      </div>
+    </div>
+    <div class="display-item hbox vcenter">
+      <div class="item-label hbox vhcenter">
+        Is New
+      </div>
+      <div class="item-value hbox vhcenter ellipsis">
+        {{p.isNew}}
+      </div>
+    </div>
+    <hr/>
+    <div class="w-100">
+      <button pButton label="Edit Patient" icon="pi pi-pencil" class="p-button w-100" (click)="editPatient(p)"></button>
+    </div>
+  </p-card>
+  <div *ngIf="patients.length === 0">
+    <h4>No Patient Found!</h4>
+  </div>
+</div>

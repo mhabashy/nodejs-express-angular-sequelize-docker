@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+<p-toast [position]="app.mobile ? 'bottom-center' : 'top-right'" key="main"></p-toast>
+<p-blockUI *ngIf="app" [blocked]="generalService.loader$ | async">
+  <div class="loader-box vbox vhcenter vfit self-hcenter grow-10">
+    <p-progressSpinner styleClass="vbox vhcenter hfit self-hcenter grow-10"></p-progressSpinner>
+    <div class="loader-text" *ngIf="generalService.loaderText$ | async">
+      {{this.generalService.loaderText$ | async}}
+    </div>
+  </div>
+</p-blockUI>

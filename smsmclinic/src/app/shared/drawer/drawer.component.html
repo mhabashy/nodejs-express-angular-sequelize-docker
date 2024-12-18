@@ -1,0 +1,34 @@
+<p-sidebar id="drawer-top" [(visible)]="drawer.open"
+             [position]="drawer.getPosition()"
+             styleClass="y-scroll"
+             [style]="(drawer.fullscreen || app.mobile) ? '': drawer.drawerStyle"
+             [dismissible]="drawer.dismissible"
+             [showCloseIcon]="drawer.showCloseIcon"
+             [closeOnEscape]="drawer.closeOnEscape"
+             [fullScreen]="drawer.fullscreen || app.mobile"
+             [blockScroll]="drawer.blockScroll"
+             (onHide)="clearDrawer()"
+  >
+  <div class="drawer-body" id="drawer-body">
+    <div class="drawer-header hbox vcenter w-100" id="drawer-header" *ngIf="drawer.menu">
+      <div style="font-size: large;font-weight: bold" class="m-r-20 grow-1 main-font">{{drawer.title}}</div>
+      <div class="self-hright hbox m-r-20  no-print">
+        <button pButton *ngIf="!app.mobile" class="ui-button m-r-10" icon="pi pi-window-maximize" (click)="drawer.fullscreen = !drawer.fullscreen"></button>
+        <button pButton
+                class="p-button p-button-danger p-button-raised p-button-danger p-button-icon-only m-r-10"
+                [ngStyle]="{'width': '100px'}" *ngIf="!drawer.canGoBack()" icon="pi pi-times-circle"
+                (click)="drawer.closeDrawer()"></button>
+        <button pButton class="p-button p-button-danger p-button-raised p-button-danger p-button-icon-only m-r-10"
+                [ngStyle]="{'width': '100px'}" *ngIf="drawer.canGoBack()" icon="pi pi-arrow-left"
+                (click)="drawer.goBack()"></button>
+      </div>
+    </div>
+    <hr *ngIf="drawer.menu" />
+    <div *ngIf="drawer.open">
+      <ng-template [ngComponentOutlet]="drawer.currentDrawer().component"
+                               [ndcDynamicInputs]="drawer.currentDrawer().input"
+                               [ndcDynamicOutputs]="drawer.currentDrawer().output"
+                               ></ng-template>
+    </div>
+  </div>
+</p-sidebar>

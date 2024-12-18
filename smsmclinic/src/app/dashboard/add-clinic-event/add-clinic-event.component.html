@@ -1,0 +1,22 @@
+<div class="p-10">
+  <form [formGroup]="clinicForm" (submit)="createClinic()">
+    <div class="vbox field">
+      <label class="m-b-10">Title (Hidden) *</label>
+      <input type="text" pInputText inputmode="text" formControlName="title" placeholder="title" [ngClass]="clinicFormDirtyInvalid('title')"/>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Date *</label>
+      <p-calendar dateFormat="yy-mm-dd" class="w-100" formControlName="date" [ngClass]="clinicFormDirtyInvalid('date')"></p-calendar>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Desired Attendance *</label>
+      <input type="text" pInputText inputmode="text" formControlName="desiredAttendance" placeholder="Desired Attendance" [ngClass]="clinicFormDirtyInvalid('desiredAttendance')"/>
+    </div>
+    <p-checkbox [binary]="true"  formControlName="psychiatrist" label="Behavioral Health Event" ></p-checkbox>
+    <br />
+    <br />
+    <div class="w-100">
+      <button pButton class="p-button p-button-success w-100"  [disabled]="clinicForm.invalid" label="Save" icon="pi pi-save"></button>
+    </div>
+  </form>
+</div>

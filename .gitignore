@@ -1,0 +1,9 @@
+/config/config.json
+.idea/*
+.vscode/*
+smsmclinic/dist/*
+smsmclinic/node_modules/*
+
+node_modules/
+npm-debug.log
+package-lock.json

@@ -1,0 +1,28 @@
+<div class="vbox vhcenter w-100 background-lighter" [ngStyle]="{'height': height + 'px'}">
+  <div class="vbox vhcenter" >
+    <form [formGroup]="loginForm" (submit)="login()">
+      <p-card [header]="title">
+        <div class="hbox">
+          <button pButton icon="pi pi-arrow-left" class="p-button p-button-only-icon" [routerLink]="['/']"></button>
+        </div>
+        <br/>
+        <hr/>
+        <div class="vbox vhcenter">
+          <img src="assets/st_mina.png" alt="" width="100px">
+        </div>
+        <div class="vbox field">
+          <label class="m-b-10">Username</label>
+          <input type="text" pInputText inputmode="text" formControlName="username" placeholder="Username" [ngClass]="loginDirtyInvalid('email')"/>
+        </div>
+        <div class="vbox field">
+          <label class="m-b-10">Password</label>
+          <input type="password" pInputText inputmode="password" formControlName="password" placeholder="Password" [ngClass]="loginDirtyInvalid('password')"/>
+        </div>
+        <br/>
+        <button pButton class="ui-button ui-button-success w-100" style="min-width: 380px;" label="Sign In" [disabled]="loginForm.invalid" ></button>
+        <br/>
+      </p-card>
+    </form>
+
+  </div>
+</div>

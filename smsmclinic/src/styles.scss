@@ -1,0 +1,580 @@
+/* You can add global styles to this file, and also import other style files */
+$primary: #283c63;
+$secondary: #ff8a97;
+$light: #f85f73;
+$lighter: #fbe8d3;
+
+$white: #F8FBFB;
+$green: #71BF44;
+$darkGreen: #096271;
+$orange: #C88D42;
+$borderGray: #a6a6a6;
+$m-input-bottom: 10px;
+
+body, html {
+  margin: 0px !important;
+  padding: 0px !important;
+  background: $lighter;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='password'],
+textarea {
+  font-size: 15px;
+}
+
+.color-primary {
+  color: $primary;
+}
+
+.color-secondary {
+  color: $secondary;
+}
+
+.color-light {
+  color: $light;
+}
+
+.color-lighter {
+  color: $lighter;
+}
+
+.color-green {
+  color: $green;
+}
+
+.color-darkGreen {
+  color: $darkGreen;
+}
+
+.color-orange {
+  color: $orange;
+}
+
+
+.background-primary {
+  background-color: $primary;
+}
+
+.background-secondary {
+  background-color: $secondary;
+}
+
+
+.background-light {
+  background-color: $light;
+}
+
+.background-lighter {
+  background-color: $lighter;
+}
+
+
+.background-green {
+  background-color: $green;
+}
+
+.background-darkGreen {
+  background-color: $darkGreen;
+}
+
+.background-orange {
+  background-color: $orange;
+}
+
+
+/// LIBRARY TO HELP OUT IN FLEX
+// https://codepen.io/jamespero/pen/YqEMxL
+
+@mixin flexbox($important: '') {
+	display: -webkit-box #{$important};
+	display: -moz-box #{$important};
+	display: -ms-flexbox #{$important};
+	display: -webkit-flex #{$important};
+	display: flex #{$important};
+}
+
+@mixin flexbox-inline($important) {
+	display: -webkit-inline-box $important;
+	display: -moz-inline-box $important;
+	display: -ms-inline-flexbox $important;
+	display: -webkit-inline-flex $important;
+	display: inline-flex $important;
+}
+
+@mixin flex($values) {
+	-webkit-box-flex: $values;
+	-moz-box-flex: $values;
+	-webkit-flex: $values;
+	-ms-flex: $values;
+	flex: $values;
+}
+
+@mixin flex-flow(
+	$values: (
+		row nowrap
+	)
+) {
+	-webkit-flex-flow: $values;
+	-moz-flex-flow: $values;
+	-ms-flex-flow: $values;
+	flex-flow: $values;
+}
+
+@mixin flex-basis($value: auto) {
+	-webkit-flex-basis: $value;
+	-moz-flex-basis: $value;
+	-ms-flex-preferred-size: $value;
+	flex-basis: $value;
+}
+
+@mixin order($val) {
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
+}
+
+@mixin flex-direction($val) {
+	-webkit-flex-flow: $val;
+	-moz-flex-flow: $val;
+	-ms-flex-flow: $val;
+	flex-direction: $val;
+}
+
+@mixin align-items($val) {
+	@if $val == 'flex-start' {
+		-ms-flex-align: start;
+	} @else if $val == 'flex-end' {
+		-ms-flex-align: end;
+	} @else {
+		-ms-flex-align: $val;
+	}
+	-webkit-align-items: $val;
+	-moz-align-items: $val;
+	-ms-align-items: $val;
+	align-items: $val;
+}
+
+@mixin align-self($val) {
+	@if $val == 'flex-start' {
+		-ms-flex-align: start;
+	} @else if $val == 'flex-end' {
+		-ms-flex-align: end;
+	} @else {
+		-ms-flex-align: $val;
+	}
+	-ms-flex-item-align: $val;
+	-webkit-align-self: $val;
+	-moz-align-self: $val;
+	-ms-align-self: $val;
+	align-self: $val;
+}
+
+@mixin justify-content($val) {
+	@if $val == 'space-between' {
+		-ms-flex-pack: justify;
+	} @else {
+		-ms-flex-pack: $val;
+	}
+	-webkit-justify-content: $val;
+	-moz-justify-content: $val;
+	-ms-justify-content: $val;
+	justify-content: $val;
+}
+
+@mixin flex-shrink($val) {
+	-webkit-box-flex: 0 $val 0;
+	-moz-box-flex: 0 $val 0;
+	-webkit-flex: 0 $val 0;
+	-ms-flex: 0 $val 0;
+	flex: 0 $val 0;
+}
+
+@mixin flex-grow($val) {
+	-webkit-box-flex: $val 0 0;
+	-moz-box-flex: $val 0 0;
+	-webkit-flex: $val 0 0;
+	-ms-flex: $val 0 0;
+	flex: $val 0 0;
+}
+
+@mixin flex-wrap($val) {
+	-webkit-flex-wrap: $val;
+	-moz-flex-wrap: $val;
+	-ms-flex-wrap: $val;
+	-o-flex-wrap: $val;
+	flex-wrap: $val;
+}
+
+.vbox,
+.hbox {
+	@include flexbox();
+	@include flex-direction(row);
+	@include align-items(flex-start);
+	@include justify-content(flex-start);
+}
+
+.hbox {
+	@include flex-direction(row);
+
+	&.vcenter {
+		@include align-items(center);
+	}
+
+	&.hcenter {
+		@include justify-content(center);
+	}
+
+	&.vhcenter {
+		@include align-items(center);
+		@include justify-content(center);
+	}
+
+	&.vtop {
+		@include align-items(flex-start);
+	}
+
+	&.vbottom {
+		@include align-items(flex-end);
+	}
+
+	&.vfit {
+		@include align-items(stretch);
+	}
+
+	&.hleft {
+		@include justify-content(flex-start);
+	}
+
+	&.hright {
+		@include justify-content(flex-end);
+	}
+
+	&.wrap {
+		@include flex-wrap(wrap);
+	}
+}
+
+// Used on a container that already has layout:'container'
+// Vertical Layout
+.vbox {
+	@include flex-direction(column);
+
+	// Centers items vertically
+	&.vcenter {
+		@include justify-content(center);
+	}
+
+	// Centers items horizontally
+	&.hcenter {
+		@include align-items(center);
+	}
+
+	// Centers items vertically and horizontally
+	&.vhcenter {
+		@include align-items(center);
+		@include justify-content(center);
+	}
+
+	&.vtop {
+		@include justify-content(flex-start);
+	}
+
+	&.vbottom {
+		@include justify-content(flex-end);
+	}
+
+	&.hfit {
+		@include align-items(stretch);
+	}
+
+	&.hleft {
+		@include align-items(flex-start);
+	}
+
+	&.hright {
+		@include align-items(flex-end);
+	}
+}
+
+.self-hright {
+	@include align-self(flex-end);
+}
+
+.self-hleft {
+	@include align-self(flex-start);
+}
+
+.self-hcenter {
+	@include align-self(center);
+}
+
+.grow-1 {
+	@include flex-grow(1);
+}
+
+.grow-2 {
+	@include flex-grow(2);
+}
+
+.grow-3 {
+	@include flex-grow(3);
+}
+
+.grow-4 {
+	@include flex-grow(4);
+}
+
+.grow-10 {
+	@include flex-grow(10);
+}
+
+.shrink {
+	@include flex-shrink(1);
+}
+
+.m-r-10 {
+	margin-right: 10px !important;
+}
+.m-r-16 {
+	margin-right: 16px !important;
+}
+.m-r-20 {
+	margin-right: 20px !important;
+}
+.m-b-10 {
+	margin-bottom: 10px !important;
+}
+
+
+.m-10 {
+	margin: 10px;
+}
+.m-16 {
+	margin: 16px;
+}
+.m-20 {
+	margin: 20px !important;
+}
+.m-i-2 {
+	margin: 2px !important;
+}
+.m-i-10 {
+	margin: 10px !important;
+}
+
+
+.p-6 {
+	padding: 6px;
+}
+
+.p-10 {
+	padding: 10px;
+}
+.p-16 {
+	padding: 16px;
+}
+.p-20 {
+	padding: 20px !important;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.m-center {
+  margin: 0 auto;
+}
+
+// For All Scroll
+.y-scroll {
+  overflow-y: auto;
+}
+
+.field {
+  @extend .m-b-10;
+  input {
+    width: 100% !important;
+    .invalid {
+      @extend .color-secondary;
+      @extend .background-lighter;
+    }
+  }
+}
+
+.ui-progress-spinner-color {
+  z-index: 99999999;
+}
+
+.ui-progress-spinner {
+  height: 100%;
+}
+
+@keyframes ui-progress-spinner-color {
+    100%,
+    0% {
+        stroke: $lighter;
+    }
+    40% {
+        stroke: $light;
+    }
+    66% {
+        stroke: $secondary;
+    }
+    80%,
+    90% {
+        stroke: $primary;
+    }
+}
+
+.present-event {
+  background-color: $primary !important;
+}
+
+.open-event {
+  background-color: $darkGreen !important;
+}
+
+.closed-event {
+  background-color: red !important;
+}
+
+.no-limit {
+  background-color: white !important;
+  color: black !important;
+}
+
+.open-all-event {
+  background-color: #71BF44 !important;
+}
+
+.link-button {
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+// For All Scroll
+.y-scroll {
+  overflow-y: auto;
+}
+
+.field {
+  @extend .m-b-10;
+  input {
+    width: 100% !important;
+    .invalid {
+      @extend .color-secondary;
+      @extend .background-lighter;
+    }
+  }
+}
+
+
+.p-dropdown-panel {
+  width: 90% !important;
+  @extend .m-b-10;
+  input {
+    width: 90% !important;
+    .invalid {
+      @extend .color-secondary;
+      @extend .background-lighter;
+    }
+  }
+}
+
+
+.ui-progress-spinner-color {
+  z-index: 99999999;
+}
+
+.ui-progress-spinner {
+  height: 100%;
+}
+
+@keyframes ui-progress-spinner-color {
+    100%,
+    0% {
+        stroke: $lighter;
+    }
+    40% {
+        stroke: $light;
+    }
+    66% {
+        stroke: $secondary;
+    }
+    80%,
+    90% {
+        stroke: $primary;
+    }
+}
+
+.m-i-2 {
+  margin: 2px;
+}
+
+.open {
+  @extend .color-darkGreen;
+}
+.closed {
+  color: red;
+}
+
+.top-title {
+  font-size: x-large;
+}
+.side-body {
+  font-size: large;
+}
+
+.field {
+  .my-dropdown {
+    @extend .w-100;
+  }
+  .my-mask {
+    @extend .w-100;
+  }
+  .p-dropdown {
+    @extend .w-100;
+  }
+}
+
+.p-calendar {
+  @extend .w-100;
+}
+
+.p-inputnumber-input {
+  @extend .w-100;
+}
+
+.display-item {
+  .item-label {
+    font-weight: bold;
+    @extend .grow-10;
+    @extend .m-i-2;
+    @extend .hleft;
+  }
+  .item-value {
+    @extend .m-i-2;
+    @extend .hright;
+    @extend .self-hright;
+  }
+}
+
+.p-checkbox-label {
+  font-size: large;
+  font-weight: bold;
+}

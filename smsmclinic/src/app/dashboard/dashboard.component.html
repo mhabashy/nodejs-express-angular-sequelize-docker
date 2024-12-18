@@ -1,0 +1,87 @@
+<div class="p-10">
+  <div class="hbox">
+    <h3 class="grow-10">Up Coming Clinic events</h3>
+    <div>
+      <button pButton icon="pi pi-plus" pTooltip="Add Event" class="p-button-icon-only m-r-10" (click)="addEvent()"></button>
+      <button pButton icon="pi pi-sign-out" pTooltip="Sign Out" class="p-button-icon-only p-button-warning" (click)="logout()"></button>
+    </div>
+  </div>
+  <p-table [value]="upcoming" responsive="true">
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+              <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="desiredAttendance">Desired Attendance <p-sortIcon field="desiredAttendance"></p-sortIcon></th>
+              <th >Behavioral Health Event</th>
+              <th pSortableColumn="total">Total Patients<p-sortIcon field="total"></p-sortIcon></th>
+              <th pSortableColumn="action">Action</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-event>
+          <tr>
+              <td>{{event.id}}</td>
+              <td>{{event.title}}</td>
+              <td>{{event.date | standardDate}}</td>
+              <td>{{event.desiredAttendance}}</td>
+              <td>{{event.psychiatrist ? 'Yes': 'No'}}</td>
+              <td>{{event.Patients.length}}</td>
+              <td>
+                <button pButton icon="pi pi-pencil" class="p-button-only-icon m-r-10" pTooltip="Edit clinic event" (click)="editClinic(event)"></button>
+                <button pButton icon="pi pi-eye" class="p-button-only-icon p-button-warning" pTooltip="View Patients" (click)="viewPatients(event)"></button>
+              </td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="6">No clinic events upcoming</td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <br/>
+  <h3>Previous Clinic events</h3>
+  <p-table [value]="previous" responsive="true">
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+              <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="desiredAttendance">Desired Attendance <p-sortIcon field="desiredAttendance"></p-sortIcon></th>
+              <th >Behavioral Health Event</th>
+              <th pSortableColumn="total">Total Patients<p-sortIcon field="total"></p-sortIcon></th>
+              <th pSortableColumn="action">Action</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-event>
+          <tr>
+              <td>
+                <span class="p-column-title">ID</span>
+                {{event.id}}</td>
+              <td>
+                <span class="p-column-title">Title</span>
+                {{event.title}}</td>
+              <td>
+                <span class="p-column-title">Date</span>
+                {{event.date | standardDate}}</td>
+              <td>
+                <span class="p-column-title">Desired Attendance</span>
+                {{event.desiredAttendance}}</td>
+              <td>
+                <span class="p-column-title">Behavioral Health</span> {{event.psychiatrist ? 'Yes' : 'No'}}</td>
+              <td>
+                <span class="p-column-title">Total Patients</span>
+                {{event.Patients.length}}</td>
+              <td>
+                <button pButton icon="pi pi-pencil" class="p-button-only-icon m-r-10" pTooltip="Edit clinic event" (click)="editClinic(event)"></button>
+                <button pButton icon="pi pi-eye" class="p-button-only-icon p-button-warning" pTooltip="View Patients" (click)="viewPatients(event)"></button>
+              </td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="6">No clinic events previous</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+<app-drawer [ngDrawer]="drawer"></app-drawer>

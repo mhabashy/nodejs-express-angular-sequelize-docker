@@ -1,0 +1,73 @@
+<div class="p-10">
+  <form *ngIf="patientForm" [formGroup]="patientForm" (submit)="updatePatient()">
+    <div class="vbox field">
+      <label class="m-b-10">First Name</label>
+      <input type="text" pInputText inputmode="text" formControlName="firstName" placeholder="firstName" [ngClass]="patientFormDirtyInvalid('firstName')"/>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Last Name</label>
+      <input type="text" pInputText inputmode="text" formControlName="lastName" placeholder="lastName" [ngClass]="patientFormDirtyInvalid('lastName')"/>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Date of Birth</label>
+      <p-calendar dateFormat="yy-mm-dd" class="w-100" formControlName="dateOfBirth" [ngClass]="patientFormDirtyInvalid('dateofBirth')"></p-calendar>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Phone</label>
+      <p-inputMask type="text" formControlName="phone" placeholder="Mobile Phone Number"
+                     mask="(999) 999-9999" inputmode="numeric"
+                     [ngClass]="{invalid: patientFormDirtyInvalid('mobilePhoneNumber', false), 'my-mask': true}">
+        </p-inputMask>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Email</label>
+      <input type="text" pInputText inputmode="text" formControlName="email" placeholder="email" [ngClass]="patientFormDirtyInvalid('email')"/>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Refill Only</label>
+      <p-inputSwitch formControlName="refills" ></p-inputSwitch>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Online</label>
+      <p-inputSwitch formControlName="online"  ></p-inputSwitch>
+    </div>
+    <div class="vbox field" *ngIf="patientForm.get('online').value">
+      <label class="m-b-10">Online Contact Type</label>
+      <p-dropdown [options]="contactTypeOptions" formControlName="contactType" placeholder="Contact Type" [ngClass]="{'invalid': patientFormDirtyInvalid('contactType', false), 'my-dropdown': true}"></p-dropdown>
+    </div>
+    <div class="vbox w-100 m-b-10 field">
+      <label style="font-weight: bold">Home Address</label>
+      <input type="text" pInputText inputmode="address" formControlName="address" placeholder="Home Address *"
+             [ngClass]="patientFormDirtyInvalid('address')"/>
+    </div>
+    <div class="hbox w-100 m-b-10">
+      <div class="m-r-10 field grow-4">
+        <label style="font-weight: bold">City</label>
+        <input type="text" pInputText inputmode="city" formControlName="city" placeholder="City *"
+               [ngClass]="patientFormDirtyInvalid('city')"/>
+      </div>
+      <div class="field grow-4">
+        <label style="font-weight: bold">Zip Code</label>
+        <input type="text" pInputText inputmode="zipcode" formControlName="zipcode" placeholder="Zip Code *"
+               [ngClass]="patientFormDirtyInvalid('zipcode')"/>
+      </div>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">is a new patient?</label>
+      <p-inputSwitch formControlName="isNew" ></p-inputSwitch>
+    </div>
+    <div class="vbox field">
+      <label class="m-b-10">Question Only</label>
+      <p-inputSwitch formControlName="generalQuestion" ></p-inputSwitch>
+    </div>
+    <div class="w-100 m-b-10">
+      <button pButton label="Save Patient" [disabled]="patientForm.invalid" icon="pi pi-save" class="p-button p-button-success w-100"></button>
+    </div>
+  </form>
+    <hr />
+    <div class="w-100 m-b-10">
+      <button pButton label="Delete Patient" icon="pi pi-trash" class="p-button p-button-danger w-100" (click)="deletePatient()"></button>
+    </div>
+  <p-confirmDialog [style]="{width: '50vw'}" key="patient-delete" position="top" [baseZIndex]="10000"></p-confirmDialog>
+</div>
+
